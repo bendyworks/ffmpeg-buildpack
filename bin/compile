@@ -8,3 +8,5 @@ curl https://cdn.rawgit.com/bendyworks/ffmpeg-binary/56ab93d3/ffmpeg-83779-gfe57
 mkdir -p vendor/ffmpeg
 # untar the binary to the directory we want
 tar -C vendor/ffmpeg -xvf ffmpeg-83779-gfe57bf7.tgz
+tar -zxvf ffmpeg-83779-gfe57bf7.tgz
+mv ffmpeg vendor/ffmpeg
