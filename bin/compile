@@ -3,9 +3,8 @@ echo "-----> Installing ffmpeg"
 # change to the BUILD_DIR ($1)
 cd $1
 # download the binary (-O) silently (-s)
-curl https://cdn.rawgit.com/bendyworks/ffmpeg-binary/56ab93d3/ffmpeg-83779-gfe57bf7.7z -s -O -ss13
-# make a directory to unzip the binary
+curl https://cdn.rawgit.com/bendyworks/ffmpeg-binary/56ab93d3/ffmpeg-83779-gfe57bf7.tgz -s -O -ss13
+# make a directory to untar the binary
 mkdir -p vendor/ffmpeg
-# unzip the binary to the directory we want
-7za e ffmpeg-83779-gfe57bf7.7z
-mv ffmpeg vendor/ffmpeg
+# untar the binary to the directory we want
+tar -C vendor/ffmpeg -xvf ffmpeg-83779-gfe57bf7.tgz
