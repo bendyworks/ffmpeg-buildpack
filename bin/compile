@@ -11,9 +11,68 @@ apt-get -y remove ffmpeg x264 libav-tools libvpx-dev libx264-dev
 
 # Get the dependencies (Ubuntu Server or headless users):
 apt-get update
-apt-get -y install build-essential checkinstall git libfaac-dev libgpac-dev \
-  libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev librtmp-dev libtheora-dev \
-    libvorbis-dev pkg-config texi2html yasm zlib1g-dev
+apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev \
+  libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
+  libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev
+
+# Make a direcotry for the source files that will be downloaded later
+mkdir ~/ffmpeg_sources
+
+# Install Yasm = assembler for x86 optimizations used by x264 and FFmpeg
+apt-get install yasm
+
+# Install libx264 video encoder
+apt-get install libx264-dev
+
+# Install libx265 video encoder
+apt-get install libx265-dev
+
+# Install libfdk-aac audio encoder
+apt-get install libfdk-aac-dev
+
+# Install libmp3lame audio encoder
+apt-get install libmp3lame-dev
+
+# Install libopus audio decoder and encoder
+apt-get install libopus-dev
+
+# Install libvpx video decoder and encoder
+apt-get install libvpx-dev
+
+# Install ffmpeg
+cd ~/ffmpeg_sources
+wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
+tar xjvf ffmpeg-snapshot.tar.bz2
+cd ffmpeg
+PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+  --prefix="$HOME/ffmpeg_build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include" \
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+  --bindir="$HOME/bin" \
+  --enable-gpl \
+  --enable-libass \
+  --enable-libfdk-aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libtheora \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-nonfree
+PATH="$HOME/bin:$PATH" make
+make install
+hash -r
+
+
+
+
+
+
+
+
 
 # Install x264
 apt-get -y install libx264-dev
