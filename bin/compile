@@ -4,7 +4,6 @@ echo "-----> Installing ffmpeg"
 cd $1
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
-mkdir -p ffmpeg
 
 # Bash script to install latest version of ffmpeg and its dependencies on Ubuntu 12.04 or 14.04
 # Inspired from https://gist.github.com/faleev/3435377
@@ -54,7 +53,6 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
   --bindir="$HOME/bin" \
   --enable-gpl \
-  --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
@@ -65,8 +63,6 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --enable-libx264 \
   --enable-libx265 \
   --enable-nonfree \
-  --disable-yasm
-./configure
 PATH="$HOME/bin:$PATH" make
 make install
 hash -r
