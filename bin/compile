@@ -6,7 +6,8 @@ cd $1
 # Bash script to install latest version of ffmpeg and its dependencies on Ubuntu 12.04 or 14.04
 # Inspired from https://gist.github.com/faleev/3435377
 
-mount -o remount, rw /
+rm /var/lib/dpkg/lock
+dpkg --configure -a
 
 # Remove any existing packages:
 apt-get -y remove ffmpeg x264 libav-tools libvpx-dev libx264-dev
