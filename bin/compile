@@ -2,7 +2,9 @@
 echo "-----> Installing ffmpeg"
 # change to the BUILD_DIR ($1)
 cd $1
-mkdir -p "$VENDOR_DIR"
+
+VENDOR_DIR=dir_name
+mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
 
 # Bash script to install latest version of ffmpeg and its dependencies on Ubuntu 12.04 or 14.04
